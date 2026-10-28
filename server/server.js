@@ -7,12 +7,14 @@ const mongoose = require('mongoose');
 const cors = require('cors');
 
 const vehicleRoutes = require('./routes/vehicleRoutes');
+const authRoutes = require('./routes/authRoutes');
 
 const app = express();
 
 // Middleware
 app.use(express.json());
 app.use(cors());
+app.use('/api/auth', authRoutes);
 
 app.use('/api/vehicle', vehicleRoutes);
 
@@ -30,3 +32,5 @@ mongoose.connect(MONGO_URI, { serverSelectionTimeoutMS: 5000 })
   .catch((err) => {
     console.error('Database connection error details:', err.message);
   });
+
+  
